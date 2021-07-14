@@ -1,7 +1,7 @@
 import React from "react";
 import ToyCard from "./ToyCard";
 
-function ToyContainer({ toys, setToys }) {
+function ToyContainer({ toys, setToys, handleUpdateToy }) {
 
   const handleDonate = (id) => {
     fetch(`http://localhost:3001/toys/${id}`,{
@@ -14,7 +14,9 @@ function ToyContainer({ toys, setToys }) {
     })
   }
 
-const toyContent = toys.map(toy => <ToyCard toy={toy} key={toy.id} onDonate={handleDonate}/>)
+  
+
+const toyContent = toys.map(toy => <ToyCard toy={toy} key={toy.id} onDonate={handleDonate} onLike={handleUpdateToy}/>)
 
   return (
     <div id="toy-collection">{toyContent}</div>

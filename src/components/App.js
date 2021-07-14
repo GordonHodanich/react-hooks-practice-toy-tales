@@ -18,6 +18,13 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function handleUpdateToy(updatedToy) {
+    const updatedToys = toys.map((toy) =>
+      toy.id === updatedToy.id ? updatedToy : toy
+    );
+    setToys(updatedToys);
+  }
+
   return (
     <>
       <Header />
@@ -25,7 +32,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} setToys={setToys}/>
+      <ToyContainer toys={toys} setToys={setToys} handleUpdateToy={handleUpdateToy}/>
     </>
   );
 }
