@@ -1,9 +1,20 @@
 import React from "react";
 import ToyCard from "./ToyCard";
 
-function ToyContainer({ toys }) {
+function ToyContainer({ toys, setToys }) {
 
-const toyContent = toys.map(toy => <ToyCard toy={toy}/>)
+  const handleDonate = (id) => {
+    fetch(`http://localhost:3001/toys/${id}`,{
+      method: "DELETE"
+    })
+    .then(resp => resp.json())
+    .then(() => {
+      const newToyDonation = toys.filter((toy) => toy.id !== id)
+      setToys(newToyDonation)
+    })
+  }
+
+const toyContent = toys.map(toy => <ToyCard toy={toy} key={toy.id} onDonate={handleDonate}/>)
 
   return (
     <div id="toy-collection">{toyContent}</div>
